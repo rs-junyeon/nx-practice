@@ -251,6 +251,9 @@ importers:
       '@nx/expo':
         specifier: 23.2.0
         version: 23.2.0(bceabc3305b853ec715859352c9a1106)
+      '@nx/gradle':
+        specifier: 23.2.0
+        version: 23.2.0(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@7.2.0)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))
       '@nx/jest':
         specifier: 23.2.0
         version: 23.2.0(a35b9a4798fcc73550a7609b4487910a)
@@ -2180,6 +2183,9 @@ packages:
         optional: true
       metro-resolver:
         optional: true
+
+  '@nx/gradle@23.2.0':
+    resolution: {integrity: sha512-PLalbCLQ9LMLRlVTx6IdkvU0Omhiwl+QfLjS4FSa3L2HUU1VKh/bzzumh93NURlD0mCswJurL5oxpKsbQ0eCbw==}
 
   '@nx/jest@23.2.0':
     resolution: {integrity: sha512-VHCqAItC8hNzIV34vLRtEo5fhw6tCqryOy1XqZvczE6qM0hQEF44ecbCnH8SrgU83NcgVjTnscbI/46V3Uh/kA==}
@@ -8714,6 +8720,10 @@ packages:
     resolution: {integrity: sha512-dRXchy+C0IgK8WPC6xvCHFRIWYUbqqdEIKPaKo/AcTUNzwLTK6AH7RjdLWsEZcAN/TBdtfUw3PYEgPr5VPr6ww==}
     engines: {node: '>=14.16'}
 
+  toml-eslint-parser@0.10.1:
+    resolution: {integrity: sha512-9mjy3frhioGIVGcwamlVlUyJ9x+WHw/TXiz9R4YOlmsIuBN43r9Dp8HZ35SF9EKjHrn3BUZj04CF+YqZ2oJ+7w==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
   toqr@0.1.1:
     resolution: {integrity: sha512-FWAPzCIHZHnrE/5/w9MPk0kK25hSQSH2IKhYh9PyjS3SG/+IEMvlwIHbhz+oF7xl54I+ueZlVnMjyzdSwLmAwA==}
 
@@ -11799,6 +11809,14 @@ snapshots:
       - verdaccio
       - vite
       - vitest
+
+  '@nx/gradle@23.2.0(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@7.2.0)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))':
+    dependencies:
+      '@nx/devkit': 23.2.0(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@7.2.0)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))
+      toml-eslint-parser: 0.10.1
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - nx
 
   '@nx/jest@23.2.0(a35b9a4798fcc73550a7609b4487910a)':
     dependencies:
@@ -19898,6 +19916,10 @@ snapshots:
       '@borewit/text-codec': 0.2.2
       '@tokenizer/token': 0.3.0
       ieee754: 1.2.1
+
+  toml-eslint-parser@0.10.1:
+    dependencies:
+      eslint-visitor-keys: 3.4.3
 
   toqr@0.1.1: {}
 

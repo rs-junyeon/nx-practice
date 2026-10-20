@@ -1,0 +1,4 @@
+rootProject.name = 'nx-practice'
+
+include 'spring-server'
+project(':spring-server').projectDir = file('apps/spring-server')

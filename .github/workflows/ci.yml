@@ -35,6 +35,13 @@ jobs:
           node-version: 24
           cache: 'pnpm'
 
+      # spring-server의 Gradle toolchain(Java 25)용 JDK
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '25'
+          cache: 'gradle'
+
       - run: pnpm install --frozen-lockfile
 
       # Prepend any command with "nx record --" to record its logs to Nx Cloud

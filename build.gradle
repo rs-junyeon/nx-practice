@@ -1,0 +1,10 @@
+plugins {
+    id "dev.nx.gradle.project-graph" version "0.1.25" apply false
+}
+
+// 루트 Gradle 프로젝트는 빈 껍데기라 Nx 프로젝트로 잡히지 않도록 하위 프로젝트에만 적용
+subprojects {
+    apply {
+        plugin("dev.nx.gradle.project-graph")
+    }
+}

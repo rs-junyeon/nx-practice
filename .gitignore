@@ -67,3 +67,7 @@ npm-debug.*
 web-build/
 cache/
 test-output
+
+# Gradle
+.gradle
+build/
