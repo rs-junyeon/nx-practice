@@ -1,13 +1,5 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.css';
-import NxWelcome from './nx-welcome';
-
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="@org/react-web" />
-    </div>
-  );
+  return <h1>react-web</h1>;
 }
 
 export default App;

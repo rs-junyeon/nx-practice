@@ -7,9 +7,4 @@ describe('App', () => {
     const { baseElement } = render(<App />);
     expect(baseElement).toBeTruthy();
   });
-
-  it('should have a greeting as the title', () => {
-    const { getAllByText } = render(<App />);
-    expect(getAllByText(new RegExp('Welcome @org/react-web', 'gi')).length > 0).toBeTruthy();
-  });
 });
