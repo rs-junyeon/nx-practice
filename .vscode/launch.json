@@ -4,9 +4,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug @org/api with Nx",
+      "name": "Debug @org/nestjs-server with Nx",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["exec", "nx", "serve", "@org/api"],
+      "runtimeArgs": ["exec", "nx", "serve", "@org/nestjs-server"],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },
@@ -14,7 +14,10 @@
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/apps/api/dist/**/*.(m|c|)js", "!**/node_modules/**"]
+      "outFiles": [
+        "${workspaceFolder}/apps/nestjs-server/dist/**/*.(m|c|)js",
+        "!**/node_modules/**"
+      ]
     }
   ]
 }

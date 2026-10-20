@@ -4,13 +4,13 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/web"
+      "path": "./apps/react-web"
     },
     {
-      "path": "./apps/api"
+      "path": "./apps/nestjs-server"
     },
     {
-      "path": "./apps/mobile"
+      "path": "./apps/rn-mobile"
     }
   ],
   "compilerOptions": {}

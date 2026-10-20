@@ -2,9 +2,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/apps/api',
+  cacheDir: '../../node_modules/.vite/apps/nestjs-server',
   test: {
-    name: '@org/api',
+    name: '@org/nestjs-server',
     watch: false,
     globals: true,
     environment: 'node',

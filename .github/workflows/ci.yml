@@ -41,7 +41,7 @@ jobs:
       - run: pnpm exec nx record -- nx format:check --base="remotes/origin/main"
       - run: pnpm exec nx run-many -t lint test typecheck export e2e
       # mobile의 build는 EAS 클라우드 빌드(Expo 계정 필요)라 CI에서 제외하고, 위의 export로 번들링만 검증
-      - run: pnpm exec nx run-many -t build --exclude=@org/mobile
+      - run: pnpm exec nx run-many -t build --exclude=@org/rn-mobile
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/docs/features/ci-features/self-healing-ci
       - run: pnpm exec nx fix-ci
         if: always()

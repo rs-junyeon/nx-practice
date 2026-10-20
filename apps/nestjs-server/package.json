@@ -1,5 +1,5 @@
 {
-  "name": "@org/api",
+  "name": "@org/nestjs-server",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -20,11 +20,11 @@
           }
         ],
         "outputs": [
-          "{workspaceRoot}/apps/api/dist/package.json",
-          "{workspaceRoot}/apps/api/dist/pnpm-lock.yaml",
-          "{workspaceRoot}/apps/api/dist/pnpm-workspace.yaml",
-          "{workspaceRoot}/apps/api/dist/patches",
-          "{workspaceRoot}/apps/api/dist/local_path_modules"
+          "{workspaceRoot}/apps/nestjs-server/dist/package.json",
+          "{workspaceRoot}/apps/nestjs-server/dist/pnpm-lock.yaml",
+          "{workspaceRoot}/apps/nestjs-server/dist/pnpm-workspace.yaml",
+          "{workspaceRoot}/apps/nestjs-server/dist/patches",
+          "{workspaceRoot}/apps/nestjs-server/dist/local_path_modules"
         ],
         "options": {
           "buildTarget": "build"
@@ -36,7 +36,7 @@
         ],
         "cache": true,
         "outputs": [
-          "{workspaceRoot}/apps/api/dist/workspace_modules"
+          "{workspaceRoot}/apps/nestjs-server/dist/workspace_modules"
         ],
         "executor": "@nx/js:copy-workspace-modules",
         "options": {
@@ -58,15 +58,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@org/api:build",
+          "buildTarget": "@org/nestjs-server:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@org/api:build:development"
+            "buildTarget": "@org/nestjs-server:build:development"
           },
           "production": {
-            "buildTarget": "@org/api:build:production"
+            "buildTarget": "@org/nestjs-server:build:production"
           }
         }
       }

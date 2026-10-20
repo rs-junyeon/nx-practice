@@ -1,6 +1,6 @@
 # Nx 기본 개념 정리
 
-이 문서는 Nx가 무엇인지, 왜 쓰는지, Turborepo와 무엇이 다른지를 이 워크스페이스(`web` + `api`)를 예시로 정리한 것입니다.
+이 문서는 Nx가 무엇인지, 왜 쓰는지, Turborepo와 무엇이 다른지를 이 워크스페이스(`react-web` + `nestjs-server`)를 예시로 정리한 것입니다.
 
 > 기준 버전: Nx 23.2.0, pnpm, Node 24
 
@@ -10,7 +10,7 @@
 
 **Nx는 모노레포(monorepo)를 위한 빌드 시스템이자 개발 도구 모음**입니다.
 
-- **모노레포**: 여러 앱과 라이브러리를 하나의 저장소에서 관리하는 방식입니다. 이 워크스페이스라면 프론트엔드 `web`과 백엔드 `api`가 한 저장소에 함께 있습니다.
+- **모노레포**: 여러 앱과 라이브러리를 하나의 저장소에서 관리하는 방식입니다. 이 워크스페이스라면 프론트엔드 `react-web`과 백엔드 `nestjs-server`가 한 저장소에 함께 있습니다.
 - Nx는 저장소 안의 프로젝트들이 **서로 어떻게 의존하는지 파악**하고, 그 정보를 바탕으로 **빌드·테스트·린트 같은 작업을 빠르고 올바른 순서로 실행**해 줍니다.
 
 한 줄로 말하면, **"프로젝트가 많아져도 느려지지 않고 일관되게 관리되는 모노레포"를 만들어 주는 도구**입니다.
@@ -37,7 +37,7 @@
 ### 3.1 워크스페이스와 프로젝트
 
 - **워크스페이스**: `nx.json`이 있는 저장소 루트 전체입니다.
-- **프로젝트**: 워크스페이스 안의 앱이나 라이브러리 하나입니다. 이 워크스페이스에는 `@org/web`과 `@org/api` 두 프로젝트가 있습니다.
+- **프로젝트**: 워크스페이스 안의 앱이나 라이브러리 하나입니다. 이 워크스페이스에는 `@org/react-web`과 `@org/nestjs-server` 두 프로젝트가 있습니다.
 
 ```
 .
@@ -52,10 +52,10 @@
 ### 3.2 타깃(Target)과 태스크(Task)
 
 - **타깃**: 프로젝트에서 실행할 수 있는 작업 이름입니다. 예: `build`, `test`, `lint`, `serve`
-- **태스크**: "어떤 프로젝트의 어떤 타깃"을 실제로 한 번 실행하는 단위입니다. 예: `@org/web:build`
+- **태스크**: "어떤 프로젝트의 어떤 타깃"을 실제로 한 번 실행하는 단위입니다. 예: `@org/react-web:build`
 
 ```bash
-pnpm nx build @org/web     # 태스크 하나 실행
+pnpm nx build @org/react-web     # 태스크 하나 실행
 pnpm nx run-many -t build  # 모든 프로젝트의 build 실행
 ```
 
@@ -74,7 +74,7 @@ Nx 플러그인은 프로젝트 안의 설정 파일을 읽고 **타깃을 자�
 어떤 타깃이 어떻게 만들어졌는지는 아래 명령으로 볼 수 있습니다.
 
 ```bash
-pnpm nx show project @org/web
+pnpm nx show project @org/react-web
 ```
 
 ### 3.4 프로젝트 그래프
@@ -85,7 +85,7 @@ Nx는 소스 코드의 `import`와 `package.json` 의존성을 분석해 **프�
 pnpm nx graph   # 브라우저에서 그래프 보기
 ```
 
-지금은 `web`과 `api`가 서로 참조하지 않아서 연결선이 없습니다. `packages/`에 공유 라이브러리를 만들고 두 앱에서 import 하면 선이 생깁니다.
+지금은 `react-web`과 `nestjs-server`가 서로 참조하지 않아서 연결선이 없습니다. `packages/`에 공유 라이브러리를 만들고 두 앱에서 import 하면 선이 생깁니다.
 
 ### 3.5 태스크 파이프라인
 
@@ -106,8 +106,8 @@ pnpm nx graph   # 브라우저에서 그래프 보기
 Nx는 태스크를 실행하기 전에 **입력(소스 파일, 설정, 의존성 버전, 환경 등)의 해시**를 계산합니다. 같은 해시로 실행한 적이 있으면 실제로 실행하지 않고 **이전 결과(출력 파일과 터미널 로그)를 복원**합니다.
 
 ```bash
-pnpm nx build @org/web   # 처음: 실제 빌드
-pnpm nx build @org/web   # 두 번째: [local cache] 로 즉시 완료
+pnpm nx build @org/react-web   # 처음: 실제 빌드
+pnpm nx build @org/react-web   # 두 번째: [local cache] 로 즉시 완료
 ```
 
 - **로컬 캐시**: 내 컴퓨터의 `.nx/cache`
@@ -122,15 +122,15 @@ pnpm nx affected -t test                # 기본 브랜치(main) 대비 변경�
 pnpm nx affected -t build --base=HEAD~1 # 기준 커밋 지정
 ```
 
-예를 들어 `apps/api`만 수정했다면 `web`의 테스트는 건너뜁니다. 공유 라이브러리를 수정했다면 그 라이브러리를 쓰는 앱도 모두 대상에 포함됩니다.
+예를 들어 `apps/nestjs-server`만 수정했다면 `react-web`의 테스트는 건너뜁니다. 공유 라이브러리를 수정했다면 그 라이브러리를 쓰는 앱도 모두 대상에 포함됩니다.
 
 ### 3.8 제너레이터 (Generators)
 
 코드와 설정을 일관된 규칙으로 생성해 주는 도구입니다. 이 워크스페이스의 두 앱도 제너레이터로 만들었습니다.
 
 ```bash
-pnpm nx g @nx/react:app apps/web --bundler=vite
-pnpm nx g @nx/nest:app apps/api
+pnpm nx g @nx/react:app apps/react-web --bundler=vite
+pnpm nx g @nx/nest:app apps/nestjs-server
 pnpm nx g @nx/react:lib packages/ui   # 라이브러리 추가 예시
 pnpm nx g @nx/react:app apps/admin --dry-run   # 실제로 만들지 않고 미리 보기
 ```
@@ -244,8 +244,8 @@ Nx (`nx.json`):
 
 ```bash
 # 개발 서버
-pnpm nx dev @org/web          # Vite 개발 서버
-pnpm nx serve @org/api        # NestJS 서버
+pnpm nx dev @org/react-web          # Vite 개발 서버
+pnpm nx serve @org/nestjs-server        # NestJS 서버
 
 # 빌드, 테스트, 린트
 pnpm nx run-many -t build
@@ -254,7 +254,7 @@ pnpm nx affected -t test      # 변경된 것만
 
 # 정보 확인
 pnpm nx show projects          # 프로젝트 목록
-pnpm nx show project @org/api  # 타깃과 설정 상세
+pnpm nx show project @org/nestjs-server  # 타깃과 설정 상세
 pnpm nx graph                  # 프로젝트 그래프
 
 # 코드 생성
