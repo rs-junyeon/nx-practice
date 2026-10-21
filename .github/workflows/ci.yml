@@ -47,6 +47,15 @@ jobs:
       # Prepend any command with "nx record --" to record its logs to Nx Cloud
       - run: pnpm exec nx record -- nx format:check --base="remotes/origin/main"
       - run: pnpm exec nx run-many -t lint test typecheck export e2e
+      # 커밋된 api-client 생성 코드가 spring-server의 현재 API 명세와 같은지 확인
+      - name: Check api-client generated code is up to date
+        run: |
+          pnpm exec nx run @org/api-client:generate
+          git add --intent-to-add packages/api-client/src/generated
+          git diff --exit-code -- packages/api-client/src/generated || {
+            echo "::error::api-client 생성 코드가 최신이 아닙니다. 'pnpm nx run @org/api-client:generate' 실행 후 결과를 커밋하세요."
+            exit 1
+          }
       # mobile의 build는 EAS 클라우드 빌드(Expo 계정 필요)라 CI에서 제외하고, 위의 export로 번들링만 검증
       - run: pnpm exec nx run-many -t build --exclude=@org/rn-mobile
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/docs/features/ci-features/self-healing-ci
