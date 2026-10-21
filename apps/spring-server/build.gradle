@@ -27,7 +27,23 @@ dependencies {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	useJUnitPlatform {
+		excludeTags 'openapi'
+	}
+}
+
+// OpenAPI 명세를 build/openapi/openapi.json으로 생성 (packages/api-client가 TS 타입 생성에 사용)
+tasks.register('generateOpenApi', Test) {
+	group = 'documentation'
+	description = 'Generates the OpenAPI spec without starting a server.'
+	testClassesDirs = sourceSets.test.output.classesDirs
+	classpath = sourceSets.test.runtimeClasspath
+	useJUnitPlatform {
+		includeTags 'openapi'
+	}
+	def outputFile = layout.buildDirectory.file('openapi/openapi.json')
+	outputs.file(outputFile)
+	systemProperty 'openapi.output', outputFile.get().asFile.absolutePath
 }
 
 nx(project) {
