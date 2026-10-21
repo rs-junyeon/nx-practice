@@ -1,5 +1,8 @@
 {
   "name": "@org/react-web",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@org/api-client": "workspace:*"
+  }
 }

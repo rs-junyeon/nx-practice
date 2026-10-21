@@ -11,6 +11,9 @@
     },
     {
       "path": "./apps/rn-mobile"
+    },
+    {
+      "path": "./packages/api-client"
     }
   ],
   "compilerOptions": {}
