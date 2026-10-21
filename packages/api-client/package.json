@@ -17,6 +17,9 @@
     "openapi-fetch": "0.17.0"
   },
   "nx": {
+    "implicitDependencies": [
+      "@org/spring-server"
+    ],
     "targets": {
       "generate": {
         "command": "openapi-typescript ../../apps/spring-server/build/openapi/openapi.json -o src/generated/schema.ts && prettier --write src/generated",
@@ -45,6 +48,9 @@
           "{projectRoot}/src/generated"
         ],
         "cache": true
+      },
+      "build": {
+        "executor": "nx:noop"
       },
       "typecheck": {
         "dependsOn": [
